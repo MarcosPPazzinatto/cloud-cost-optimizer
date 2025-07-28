@@ -1,0 +1,19 @@
+
+infrastructure:
+  - name: web-server
+    provider: aws
+    type: ec2
+    instance_type: t3.micro
+    region: us-east-1
+
+  - name: db-server
+    provider: gcp
+    type: compute
+    instance_type: e2-medium
+    region: us-central1
+
+  - name: cache
+    provider: aws
+    type: elasticache
+    instance_type: cache.t3.small
+    region: us-east-1
