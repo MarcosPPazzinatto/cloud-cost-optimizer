@@ -1,0 +1,13 @@
+{
+  "compute": {
+    "t3.micro": 0.0104,
+    "t3.small": 0.0208,
+    "t3.medium": 0.0416,
+    "t3.large": 0.0832
+  },
+  "storage": {
+    "gp2": 0.10,
+    "standard-s3": 0.023
+  }
+}
+

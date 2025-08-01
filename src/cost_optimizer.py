@@ -1,33 +1,15 @@
 import yaml
-
-# Mocked pricing data (per hour for compute, per GB/month for storage)
-PRICING = {
-    "aws": {
-        "compute": {
-            "t3.medium": 0.0416,
-            "t3.large": 0.0832
-        },
-        "storage": {
-            "gp2": 0.10
-        }
-    },
-    "gcp": {
-        "compute": {
-            "e2-standard-2": 0.034,
-            "e2-standard-4": 0.068
-        },
-        "storage": {
-            "pd-standard": 0.09
-        }
-    }
-}
+import json
 
 def load_config(path):
     with open(path, 'r') as f:
         return yaml.safe_load(f)
 
-def estimate_cost(provider, config):
-    pricing = PRICING[provider]
+def load_pricing(path):
+    with open(path, 'r') as f:
+        return json.load(f)
+
+def estimate_cost(pricing, config):
     total = 0.0
 
     for instance in config.get("compute", []):
@@ -48,8 +30,11 @@ def estimate_cost(provider, config):
 def main():
     config = load_config("configs/example-infra.yaml")
 
-    aws_cost = estimate_cost("aws", config)
-    gcp_cost = estimate_cost("gcp", config)
+    aws_pricing = load_pricing("pricing/aws-pricing.json")
+    gcp_pricing = load_pricing("pricing/gcp-pricing.json")
+
+    aws_cost = estimate_cost(aws_pricing, config)
+    gcp_cost = estimate_cost(gcp_pricing, config)
 
     print("=== Cloud Cost Estimation ===\n")
     print(f"Provider: AWS -> ${aws_cost}/month")
