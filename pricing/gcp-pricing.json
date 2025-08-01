@@ -1,0 +1,13 @@
+{
+  "compute": {
+    "e2-micro": 0.0076,
+    "e2-small": 0.015,
+    "e2-standard-2": 0.034,
+    "e2-standard-4": 0.068
+  },
+  "storage": {
+    "pd-standard": 0.09,
+    "standard-gcs": 0.020
+  }
+}
+
