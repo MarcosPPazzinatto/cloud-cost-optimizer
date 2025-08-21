@@ -17,3 +17,20 @@ infrastructure:
     type: elasticache
     instance_type: cache.t3.small
     region: us-east-1
+
+compute:
+  instances:
+    - name: "api"
+      provider: "aws"
+      region: "us-east-1"
+      family: "m7g.large"
+      count: 3
+      base_hourly_rate: 0.096
+      discounts:
+        purchase: "savings_plan"   # on_demand|spot|reserved|savings_plan|cud
+        commitment: "1y"           # none|1y|3y
+        # Provide the real effective discount when available (preferred):
+        effective_discount_pct: 0.32
+        attributes:
+          sp_type: "compute"       # example attribute for AWS SP
+    
